@@ -1,2 +1,22 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h1>Welcome to The Wall, <%= session[:name]%>!</h1>
+
+<form action="/posts" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <textarea name="post"></textarea><br>
+  <input type="submit" value="Post a Message"/>
+</form>
+
+<% @posts.each do |post| %>
+  <p><%= post.user.username %> says...</p>
+  <p><%= post.post %> <%= post.created_at  %></p>
+  <form action="/comments" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <textarea name="comment"></textarea><br>
+    <input type="hidden" name="post_id" value="<%= post.id%>"/>
+    <input type="submit" value="Post a Comment"/>
+  </form>
+  <% @comments.where(post_id:post.id).each do |comment| %>
+    <p><%= comment.user.username %> says...</p>
+    <p><%= comment.comment %></p>
+  <% end %>
+<% end %>

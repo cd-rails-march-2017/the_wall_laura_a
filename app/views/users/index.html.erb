@@ -1,11 +1,11 @@
 <h1>Log In to The Wall!</h1>
 
-<form action="#" method="post">
+<form action="/users/login" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <label>Username</label><br>
-  <input type="text" name="user[username]" placeholder="username"><br>
+  <input type="text" name="username" placeholder="username"><br>
   <label>Password</label><br>
-  <input type="text" name="user[password]" placeholder="password"><br>
+  <input type="password" name="password" placeholder="password"><br>
   <input type="submit" value="Login"><br>
 </form>
 
